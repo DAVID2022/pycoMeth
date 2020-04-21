@@ -1,0 +1,1208 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Python package for nanopore DNA methylation analysis downstream to Nanopolish">
+      
+      
+        <link rel="canonical" href="https://a-slide.github.io/pycoMeth/Meth_Comp/API_usage/">
+      
+      
+        <meta name="author" content="Adrien Leger">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.1">
+    
+    
+      
+        <title>jupyter API usage - pycoMeth</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a676eddb.min.css">
+      
+      
+    
+    
+    
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/ansi-colours.css">
+    
+      <link rel="stylesheet" href="../../css/jupyter-cells.css">
+    
+      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#meth_comp-api-usage" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://a-slide.github.io/pycoMeth/" title="pycoMeth" class="md-header-nav__button md-logo" aria-label="pycoMeth">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,8A3,3 0 0,0 15,5A3,3 0 0,0 12,2A3,3 0 0,0 9,5A3,3 0 0,0 12,8M12,11.54C9.64,9.35 6.5,8 3,8V19C6.5,19 9.64,20.35 12,22.54C14.36,20.35 17.5,19 21,19V8C17.5,8 14.36,9.35 12,11.54Z" /></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            pycoMeth
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              jupyter API usage
+            
+          </span>
+        </div>
+      
+    </div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/a-slide/pycoMeth/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    a-slide/pycoMeth
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://a-slide.github.io/pycoMeth/" title="pycoMeth" class="md-nav__button md-logo" aria-label="pycoMeth">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,8A3,3 0 0,0 15,5A3,3 0 0,0 12,2A3,3 0 0,0 9,5A3,3 0 0,0 12,8M12,11.54C9.64,9.35 6.5,8 3,8V19C6.5,19 9.64,20.35 12,22.54C14.36,20.35 17.5,19 21,19V8C17.5,8 14.36,9.35 12,11.54Z" /></svg>
+
+    </a>
+    pycoMeth
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/a-slide/pycoMeth/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    a-slide/pycoMeth
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../installation/" title="Installation instructions" class="md-nav__link">
+      Installation instructions
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      CpG_Aggregate Usage
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="CpG_Aggregate Usage" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        CpG_Aggregate Usage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../CpG_Aggregate/usage/" title="Using CpG_Aggregate" class="md-nav__link">
+      Using CpG_Aggregate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../CpG_Aggregate/API_usage/" title="jupyter API usage" class="md-nav__link">
+      jupyter API usage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../CpG_Aggregate/CLI_usage/" title="Command line usage" class="md-nav__link">
+      Command line usage
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Interval_Aggregate Usage
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Interval_Aggregate Usage" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Interval_Aggregate Usage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Interval_Aggregate/usage/" title="Using Interval_Aggregate" class="md-nav__link">
+      Using Interval_Aggregate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Interval_Aggregate/API_usage/" title="jupyter API usage" class="md-nav__link">
+      jupyter API usage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Interval_Aggregate/CLI_usage/" title="Command line usage" class="md-nav__link">
+      Command line usage
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Meth_Comp Usage
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Meth_Comp Usage" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Meth_Comp Usage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../usage/" title="Using Meth_Comp" class="md-nav__link">
+      Using Meth_Comp
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        jupyter API usage
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,9H17V7H3V9M3,13H17V11H3V13M3,17H17V15H3V17M19,17H21V15H19V17M19,7V9H21V7H19M19,13H21V11H19V13Z" /></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="jupyter API usage" class="md-nav__link md-nav__link--active">
+      jupyter API usage
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#import-module" class="md-nav__link">
+    Import module
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    Getting help
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    Example usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Example usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-with-cpg-aggregate-output" class="md-nav__link">
+    Usage with CpG Aggregate output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-with-interval-aggregate-output-with-a-single-significant-result" class="md-nav__link">
+    Usage with Interval Aggregate output with a single significant result
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-with-interval-aggregate-output-and-larger-dataset" class="md-nav__link">
+    Usage with Interval Aggregate output and larger dataset
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../CLI_usage/" title="Command line usage" class="md-nav__link">
+      Command line usage
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Comp_Report Usage
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Comp_Report Usage" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Comp_Report Usage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Comp_Report/usage/" title="Using Comp_Report" class="md-nav__link">
+      Using Comp_Report
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Comp_Report/API_usage/" title="jupyter API usage" class="md-nav__link">
+      jupyter API usage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Comp_Report/CLI_usage/" title="Command line usage" class="md-nav__link">
+      Command line usage
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      CGI_Finder Usage
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="CGI_Finder Usage" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        CGI_Finder Usage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../CGI_Finder/usage/" title="Using CGI_Finder" class="md-nav__link">
+      Using CGI_Finder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../CGI_Finder/API_usage/" title="jupyter API usage" class="md-nav__link">
+      jupyter API usage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../CGI_Finder/CLI_usage/" title="Command line usage" class="md-nav__link">
+      Command line usage
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/" title="Contributing" class="md-nav__link">
+      Contributing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../code_of_conduct/" title="Code of conduct" class="md-nav__link">
+      Code of conduct
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../licence/" title="Licence" class="md-nav__link">
+      Licence
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../changelog/" title="Changelog" class="md-nav__link">
+      Changelog
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#import-module" class="md-nav__link">
+    Import module
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    Getting help
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    Example usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Example usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-with-cpg-aggregate-output" class="md-nav__link">
+    Usage with CpG Aggregate output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-with-interval-aggregate-output-with-a-single-significant-result" class="md-nav__link">
+    Usage with Interval Aggregate output with a single significant result
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-with-interval-aggregate-output-and-larger-dataset" class="md-nav__link">
+    Usage with Interval Aggregate output and larger dataset
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/a-slide/pycoMeth/edit/master/docs/Meth_Comp/API_usage.ipynb" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script>
+(function() {
+  function addWidgetsRenderer() {
+    var mimeElement = document.querySelector('script[type="application/vnd.jupyter.widget-view+json"]');
+    var scriptElement = document.createElement('script');
+    var widgetRendererSrc = 'https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js';
+    var widgetState;
+
+    // Fallback for older version:
+    try {
+      widgetState = mimeElement && JSON.parse(mimeElement.innerHTML);
+
+      if (widgetState && (widgetState.version_major < 2 || !widgetState.version_major)) {
+        widgetRendererSrc = 'jupyter-js-widgets@*/dist/embed.js';
+      }
+    } catch(e) {}
+
+    scriptElement.src = widgetRendererSrc;
+    document.body.appendChild(scriptElement);
+  }
+
+  document.addEventListener('DOMContentLoaded', addWidgetsRenderer);
+}());
+</script>
+
+<div class="cell border-box-sizing text_cell rendered">
+<p><div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
+<h1 id="meth_comp-api-usage">Meth_Comp API usage</h1>
+<p></div>
+</div></p>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<p><div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
+<h2 id="import-module">Import module</h2>
+<p></div>
+</div></p>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="c1"># Import main module </span>
+<span class="kn">from</span> <span class="nn">pycoMeth.Meth_Comp</span> <span class="kn">import</span> <span class="n">Meth_Comp</span>
+
+<span class="c1"># optionally inport jupyter helper functions</span>
+<span class="kn">from</span> <span class="nn">pycoMeth.common</span> <span class="kn">import</span> <span class="n">head</span><span class="p">,</span> <span class="n">jhelp</span>
+</code></pre></div>
+
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<p><div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
+<h2 id="getting-help">Getting help</h2>
+<p></div>
+</div></p>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="n">jhelp</span><span class="p">(</span><span class="n">Meth_Comp</span><span class="p">)</span>
+</code></pre></div>
+
+</div>
+
+<div class="output_wrapper" markdown="1">
+<div class="output" markdown="1">
+
+
+<div class="output_area" markdown="1">
+
+<p><strong>Meth_Comp</strong> (aggregate_fn_list, ref_fasta_fn, output_tsv_fn, output_bed_fn, max_missing, min_diff_llr, sample_id_list, pvalue_adj_method, pvalue_threshold, verbose, quiet, progress, kwargs)</p>
+<p>Compare methylation values for each CpG positions or intervals between n samples and perform a statistical test to evaluate if the positions are significantly different. For 2 samples a Mann_Withney test is performed otherwise multiples samples are compared with a Kruskal Wallis test. pValues are adjusted for multiple tests using the Benjamini &amp; Hochberg procedure for controlling the false discovery rate.</p>
+<hr>
+<ul>
+<li><strong>aggregate_fn_list</strong> (required) [list(str)]</li>
+</ul>
+<p>A list of output tsv files corresponding to several samples to compare generated by either CpG_Aggregate or Interval_Aggregate. (can be gzipped)</p>
+<ul>
+<li><strong>ref_fasta_fn</strong> (required) [str]</li>
+</ul>
+<p>Reference file used for alignment in Fasta format (ideally already indexed with samtools faidx)</p>
+<ul>
+<li><strong>output_tsv_fn</strong> (default: None) [str]</li>
+</ul>
+<p>Path to write an more extensive result report in TSV format (At least 1 output file is required) (can be gzipped)</p>
+<ul>
+<li><strong>output_bed_fn</strong> (default: None) [str]</li>
+</ul>
+<p>Path to write a summary result file in BED format (At least 1 output file is required) (can be gzipped)</p>
+<ul>
+<li><strong>max_missing</strong> (default: 0) [int]</li>
+</ul>
+<p>Max number of missing samples to perform the test</p>
+<ul>
+<li><strong>min_diff_llr</strong> (default: 2) [float]</li>
+</ul>
+<p>Minimal llr boundary for negative and positive median llr. The test if only performed if at least one sample has a median llr above (methylated) and 1 sample has a median llr below (unmethylated)</p>
+<ul>
+<li><strong>sample_id_list</strong> (default: None) [list(str)]</li>
+</ul>
+<p>list of sample ids to annotate results in tsv file</p>
+<ul>
+<li><strong>pvalue_adj_method</strong> (default: fdr_bh) [str]</li>
+</ul>
+<p>Method to use for pValue multiple test adjustment</p>
+<ul>
+<li><strong>pvalue_threshold</strong> (default: 0.01) [float]</li>
+</ul>
+<p>Alpha parameter (family-wise error rate) for pValue adjustment</p>
+<ul>
+<li><p><strong>verbose</strong> (default: False) [bool]</p>
+</li>
+<li><p><strong>quiet</strong> (default: False) [bool]</p>
+</li>
+<li><p><strong>progress</strong> (default: False) [bool]</p>
+</li>
+<li><p><strong>kwargs</strong></p>
+</li>
+</ul>
+
+
+</div>
+
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<p><div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
+<h2 id="example-usage">Example usage</h2>
+<p></div>
+</div></p>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<p><div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
+<h4 id="usage-with-cpg-aggregate-output">Usage with CpG Aggregate output</h4>
+<p></div>
+</div></p>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="n">ff</span> <span class="o">=</span> <span class="n">Meth_Comp</span> <span class="p">(</span>
+    <span class="n">aggregate_fn_list</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;./data/Yeast_CpG_1.tsv.gz&quot;</span><span class="p">,</span> 
+        <span class="s2">&quot;./data/Yeast_CpG_2.tsv.gz&quot;</span><span class="p">,</span> 
+        <span class="s2">&quot;./data/Yeast_CpG_3.tsv.gz&quot;</span><span class="p">,</span> 
+        <span class="s2">&quot;./data/Yeast_CpG_4.tsv.gz&quot;</span><span class="p">],</span>
+    <span class="n">ref_fasta_fn</span><span class="o">=</span><span class="s2">&quot;./data/yeast.fa&quot;</span><span class="p">,</span>
+    <span class="n">output_bed_fn</span><span class="o">=</span><span class="s2">&quot;./results/Yeast_CpG_meth_comp.bed&quot;</span><span class="p">,</span>
+    <span class="n">output_tsv_fn</span><span class="o">=</span><span class="s2">&quot;./results/Yeast_CpG_meth_comp.tsv.gz&quot;</span><span class="p">,</span>
+    <span class="n">sample_id_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;S1&quot;</span><span class="p">,</span><span class="s2">&quot;S2&quot;</span><span class="p">,</span><span class="s2">&quot;S3&quot;</span><span class="p">,</span><span class="s2">&quot;S4&quot;</span><span class="p">],</span>
+    <span class="n">progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">head</span><span class="p">(</span><span class="s2">&quot;./results/Yeast_CpG_meth_comp.tsv.gz&quot;</span><span class="p">)</span>
+<span class="n">head</span><span class="p">(</span><span class="s2">&quot;./results/Yeast_CpG_meth_comp.bed&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+</div>
+
+<div class="output_wrapper" markdown="1">
+<div class="output" markdown="1">
+
+
+<div class="output_area" markdown="1">
+<div class="output_subarea output_stream output_stderr output_text">
+<pre><span class="ansi-blue-intense-fg ansi-bold">## Checking options and input files ##</span>
+<span class="ansi-blue-intense-fg ansi-bold">## Parsing files ##</span>
+<span class="ansi-green-fg">    Reading input files header and checking consistancy between headers</span>
+<span class="ansi-green-fg">    Starting asynchronous file parsing</span>
+    Progress: 37.1M bytes [00:07, 4.80M bytes/s]                       
+<span class="ansi-green-fg">    Adjust pvalues</span>
+<span class="ansi-green-fg">    Writing output file</span>
+    Progress: 100%|██████████| 344/344 [00:00&lt;00:00, 20.0k sites/s]
+<span class="ansi-green-fg">    Results summary</span>
+<span class="ansi-green-fg">        Sites with insufficient samples: 211,400</span>
+<span class="ansi-green-fg">        Sites with insufficient effect size: 33,071</span>
+<span class="ansi-green-fg">        Valid sites: 344</span>
+<span class="ansi-green-fg">        Sites with non-significant pvalue: 344</span>
+<span class="ansi-green-fg">        Sites with non-significant adjusted pvalue: 344</span>
+</pre>
+</div>
+</div>
+
+<div class="output_area" markdown="1">
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>chromosome start  end    n_samples pvalue              adj_pvalue          neg_med pos_med ambiguous_med labels                med_llr_list                raw_llr_list                                       
+I          118799 118800 4         0.29978058859571194 0.4279805197751711  3       1       0             [&#34;S1&#34;,&#34;S2&#34;,&#34;S3&#34;,&#34;S4&#34;] [2.005,-2.645,-6.64,-5.51]  [[-1.82,5.83],[-0.09,-5.2],[-2.67,-10.61],[-6.7...
+I          141415 141416 4         0.11800901597381579 0.3742064977444858  1       1       2             [&#34;S1&#34;,&#34;S2&#34;,&#34;S3&#34;,&#34;S4&#34;] [-4.175,0.135,3.02,-0.02]   [[-1.33,-4.52,-3.83,-4.67],[-1.42,1.69],[6.62,-...
+I          151819 151820 4         0.1315327225513005  0.3742064977444858  1       1       2             [&#34;S1&#34;,&#34;S2&#34;,&#34;S3&#34;,&#34;S4&#34;] [-2.98,-1.95,2.93,-1.48]    [[-3.68,-4.4,0.54,-2.28],[-3.45,-1.95,-1.21],[4...
+I          167230 167237 4         0.10985439586067039 0.3742064977444858  3       1       0             [&#34;S1&#34;,&#34;S2&#34;,&#34;S3&#34;,&#34;S4&#34;] [-6.305,-6.94,3.6,-4.17]    [[-5.06,-7.55],[-6.94,-7.26,-1.12],[3.6,5.68,0....
+II         64407  64408  4         0.16469672531155308 0.3742064977444858  1       1       2             [&#34;S1&#34;,&#34;S2&#34;,&#34;S3&#34;,&#34;S4&#34;] [-1.06,-0.19,-3.68,2.93]    [[-1.06,-0.81,-2.26],[1.65,-2.03],[-3.85,-2.85,...
+II         102416 102417 4         0.06267205003507882 0.3742064977444858  2       1       1             [&#34;S1&#34;,&#34;S2&#34;,&#34;S3&#34;,&#34;S4&#34;] [0.715,-3.05,2.17,-5.535]   [[-0.21,1.64],[-3.3,-2.8],[2.24,2.1],[-4.52,-2....
+II         108834 108835 4         0.1633613146761696  0.3742064977444858  3       1       0             [&#34;S1&#34;,&#34;S2&#34;,&#34;S3&#34;,&#34;S4&#34;] [2.95,-5.16,-3.53,-4.53]    [[4.7,1.2],[-5.89,-4.43],[-6.55,-0.25,-3.53],[-...
+II         110457 110458 4         0.04436795794391088 0.3742064977444858  2       1       1             [&#34;S1&#34;,&#34;S2&#34;,&#34;S3&#34;,&#34;S4&#34;] [-1.405,2.69,-3.285,-7.045] [[-0.97,-1.34,-1.47,-3.97],[-0.84,6.22],[-7.1,0...
+II         112989 112990 4         0.3618050274975317  0.46268003516412975 1       1       2             [&#34;S1&#34;,&#34;S2&#34;,&#34;S3&#34;,&#34;S4&#34;] [-1.38,2.1,-1.94,-2.93]     [[-1.38,4.34,-5.48,-5.45,-0.93],[3.4,0.8],[-1.3...
+
+track name=meth_comp itemRgb=On
+I   118799  118800  .   0   .   118799  118800  230,230,230
+I   141415  141416  .   0   .   141415  141416  230,230,230
+I   151819  151820  .   0   .   151819  151820  230,230,230
+I   167230  167237  .   0   .   167230  167237  230,230,230
+II  64407   64408   .   0   .   64407   64408   230,230,230
+II  102416  102417  .   0   .   102416  102417  230,230,230
+II  108834  108835  .   0   .   108834  108835  230,230,230
+II  110457  110458  .   0   .   110457  110458  230,230,230
+II  112989  112990  .   0   .   112989  112990  230,230,230
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<p><div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
+<h4 id="usage-with-interval-aggregate-output-with-a-single-significant-result">Usage with Interval Aggregate output with a single significant result</h4>
+<p></div>
+</div></p>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="n">ff</span> <span class="o">=</span> <span class="n">Meth_Comp</span> <span class="p">(</span>
+    <span class="n">aggregate_fn_list</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;./data/Yeast_CGI_1.tsv.gz&quot;</span><span class="p">,</span> 
+        <span class="s2">&quot;./data/Yeast_CGI_2.tsv.gz&quot;</span><span class="p">,</span> 
+        <span class="s2">&quot;./data/Yeast_CGI_3.tsv.gz&quot;</span><span class="p">,</span> 
+        <span class="s2">&quot;./data/Yeast_CGI_4.tsv.gz&quot;</span><span class="p">],</span>
+    <span class="n">ref_fasta_fn</span><span class="o">=</span><span class="s2">&quot;./data/yeast.fa&quot;</span><span class="p">,</span>
+    <span class="n">output_bed_fn</span><span class="o">=</span><span class="s2">&quot;./results/Yeast_CGI_meth_comp.bed&quot;</span><span class="p">,</span>
+    <span class="n">output_tsv_fn</span><span class="o">=</span><span class="s2">&quot;./results/Yeast_CGI_meth_comp.tsv.gz&quot;</span><span class="p">,</span>
+    <span class="n">sample_id_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;S1&quot;</span><span class="p">,</span><span class="s2">&quot;S2&quot;</span><span class="p">,</span><span class="s2">&quot;S3&quot;</span><span class="p">,</span><span class="s2">&quot;S4&quot;</span><span class="p">],</span>
+    <span class="n">max_missing</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">min_diff_llr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">head</span><span class="p">(</span><span class="s2">&quot;./results/Yeast_CGI_meth_comp.tsv.gz&quot;</span><span class="p">)</span>
+<span class="n">head</span><span class="p">(</span><span class="s2">&quot;./results/Yeast_CGI_meth_comp.bed&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper" markdown="1">
+<div class="output" markdown="1">
+
+
+<div class="output_area" markdown="1">
+<div class="output_subarea output_stream output_stderr output_text">
+<pre><span class="ansi-blue-intense-fg ansi-bold">## Checking options and input files ##</span>
+<span class="ansi-blue-intense-fg ansi-bold">## Parsing files ##</span>
+<span class="ansi-green-fg">    Reading input files header and checking consistancy between headers</span>
+<span class="ansi-green-fg">    Starting asynchronous file parsing</span>
+    Progress: 776k bytes [00:00, 7.05M bytes/s]              
+<span class="ansi-green-fg">    Adjust pvalues</span>
+<span class="ansi-green-fg">    Writing output file</span>
+    Progress: 100%|██████████| 4.00/4.00 [00:00&lt;00:00, 9.99k sites/s]
+<span class="ansi-green-fg">    Results summary</span>
+<span class="ansi-green-fg">        Sites with insufficient effect size: 938</span>
+<span class="ansi-green-fg">        Sites with insufficient samples: 921</span>
+<span class="ansi-green-fg">        Valid sites: 4</span>
+<span class="ansi-green-fg">        Sites with non-significant adjusted pvalue: 4</span>
+<span class="ansi-green-fg">        Sites with non-significant pvalue: 3</span>
+<span class="ansi-green-fg">        Sites with significant pvalue: 1</span>
+</pre>
+</div>
+</div>
+
+<div class="output_area" markdown="1">
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>chromosome start   end     n_samples pvalue               adj_pvalue           neg_med pos_med ambiguous_med unique_cpg_pos labels                med_llr_list               raw_llr_list                                       raw_pos_list                                       
+V          65380   65612   3         0.007390942610433672 0.029563770441734687 2       1       0             8              [&#34;S1&#34;,&#34;S3&#34;,&#34;S4&#34;]      [-2.28,0.542,-2.125]       [[-2.515,-0.06,-3.84,-0.475,-3.905,-11.445,-2.0...[[65382,65416,65434,65470,65482,65497,65527,655...
+X          745486  745750  3         0.1931198217867195   0.257493095715626    2       1       0             3              [&#34;S1&#34;,&#34;S3&#34;,&#34;S4&#34;]      [-3.42,-2.475,0.28]        [[-3.65,-3.42,-0.755],[-2.475,-9.35,-1.88],[0.2...[[745492,745563,745592],[745492,745563,745592],...
+XV         108248  108543  3         0.7757164275739235   0.7757164275739235   2       1       0             9              [&#34;S2&#34;,&#34;S3&#34;,&#34;S4&#34;]      [0.425,-2.445,-2.77]       [[0.425,-8.775,1.17],[-4.515,-4.21,-3.645,-2.44...[[108482,108497,108514],[108288,108308,108319,1...
+XV         1082847 1083061 4         0.058554972459289256 0.11710994491857851  3       1       0             3              [&#34;S1&#34;,&#34;S2&#34;,&#34;S3&#34;,&#34;S4&#34;] [-3.47,-2.49,-6.875,0.395] [[-1.99,-4.68,-3.47],[-2.49,-0.83,-6.38],[-6.87...[[1082929,1082947,1082962],[1082929,1082947,108...
+
+track name=meth_comp itemRgb=On
+V   65380   65612   .   1   .   65380   65612   230,230,230
+X   745486  745750  .   0   .   745486  745750  230,230,230
+XV  108248  108543  .   0   .   108248  108543  230,230,230
+XV  1082847 1083061 .   0   .   1082847 1083061 230,230,230
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<p><div class="inner_cell" markdown="1">
+<div class="text_cell_render border-box-sizing rendered_html" markdown="1"></p>
+<h4 id="usage-with-interval-aggregate-output-and-larger-dataset">Usage with Interval Aggregate output and larger dataset</h4>
+<p></div>
+</div></p>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="c1"># Generate list of file paths and sample ids from source directory</span>
+<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">fn_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;./data/medaka_CGI_*&quot;</span><span class="p">))</span>
+<span class="n">id_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">fn</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;medaka_CGI_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;.tsv.gz&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">fn_list</span><span class="p">]</span>
+
+<span class="n">Meth_Comp</span> <span class="p">(</span>
+    <span class="n">aggregate_fn_list</span><span class="o">=</span><span class="n">fn_list</span><span class="p">,</span>
+    <span class="n">ref_fasta_fn</span><span class="o">=</span><span class="s2">&quot;./data/medaka.fa&quot;</span><span class="p">,</span>
+    <span class="n">output_bed_fn</span><span class="o">=</span><span class="s2">&quot;./results/Medaka_CGI_meth_comp.bed&quot;</span><span class="p">,</span>
+    <span class="n">output_tsv_fn</span><span class="o">=</span><span class="s2">&quot;./results/Medaka_CGI_meth_comp.tsv.gz&quot;</span><span class="p">,</span>
+    <span class="n">sample_id_list</span> <span class="o">=</span> <span class="n">id_list</span><span class="p">,</span>
+    <span class="n">max_missing</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">min_diff_llr</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">head</span><span class="p">(</span><span class="s2">&quot;./results/Medaka_CGI_meth_comp.tsv.gz&quot;</span><span class="p">,</span> <span class="n">max_char_col</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">head</span><span class="p">(</span><span class="s2">&quot;./results/Medaka_CGI_meth_comp.bed&quot;</span><span class="p">,</span> <span class="n">max_char_col</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+</code></pre></div>
+
+</div>
+
+<div class="output_wrapper" markdown="1">
+<div class="output" markdown="1">
+
+
+<div class="output_area" markdown="1">
+<div class="output_subarea output_stream output_stderr output_text">
+<pre><span class="ansi-blue-intense-fg ansi-bold">## Checking options and input files ##</span>
+<span class="ansi-blue-intense-fg ansi-bold">## Parsing files ##</span>
+<span class="ansi-green-fg">    Reading input files header and checking consistancy between headers</span>
+<span class="ansi-green-fg">    Starting asynchronous file parsing</span>
+    Progress: 556M bytes [00:49, 11.2M bytes/s]                       
+<span class="ansi-green-fg">    Adjust pvalues</span>
+<span class="ansi-green-fg">    Writing output file</span>
+    Progress: 100%|██████████| 10.8k/10.8k [00:02&lt;00:00, 3.60k sites/s]
+<span class="ansi-green-fg">    Results summary</span>
+<span class="ansi-green-fg">        Sites with insufficient effect size: 201,365</span>
+<span class="ansi-green-fg">        Sites with insufficient samples: 54,136</span>
+<span class="ansi-green-fg">        Valid sites: 10,784</span>
+<span class="ansi-green-fg">        Sites with non-significant adjusted pvalue: 7,252</span>
+<span class="ansi-green-fg">        Sites with non-significant pvalue: 6,506</span>
+<span class="ansi-green-fg">        Sites with significant pvalue: 4,278</span>
+<span class="ansi-green-fg">        Sites with significant adjusted pvalue: 3,532</span>
+</pre>
+</div>
+</div>
+
+<div class="output_area" markdown="1">
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>chromosome start  end    n_samples pvalue                adj_pvalue             neg_med pos_med ambiguous_med unique_cpg_pos labels                                   med_llr_list                             raw_llr_list                             raw_pos_list                             
+1          136203 136504 12        0.7664606178319608    0.8325424217694418     1       5       6             9              [&#34;11-1_A3&#34;,&#34;117-2_C4&#34;,&#34;131-1_F4&#34;,&#34;134...[0.46,0.47,0.66,1.6,1.14,1.01,0.18,0....[[1.19,-0.05,4.49,-1.22,-3.13,0.46,-1...[[136270,136281,136306,136348,136368,...
+1          308880 309181 12        0.0006937034588303196 0.002644361293752621   8       1       3             6              [&#34;11-1_A3&#34;,&#34;117-2_C4&#34;,&#34;131-1_F4&#34;,&#34;134...[0.655,-1.875,0.57,-1.152,2.145,-2.92...[[-0.1,1.41,5.22,-1.51,-0.23,1.59],[-...[[308888,308972,309024,309052,309091,...
+1          416519 416885 11        0.4452430035616395    0.5407095214424235     2       3       6             12             [&#34;11-1_A3&#34;,&#34;117-2_C4&#34;,&#34;131-1_F4&#34;,&#34;134...[-1.92,1.538,0.365,0.18,1.852,0.64,0....[[0.15,5.61,2.36,-2.21,2.75,2.54,-1.6...[[416564,416587,416630,416648,416661,...
+1          436047 436994 11        0.4055421456046574    0.5019357854011965     10      1       0             24             [&#34;11-1_A3&#34;,&#34;117-2_C4&#34;,&#34;131-1_F4&#34;,&#34;134...[2.16,-3.915,-3.758,-3.605,-3.035,-2....[[1.065,0.865,11.17,1.68,5.38,2.6,2.1...[[436726,436775,436794,436877,436922,...
+1          438148 438361 11        0.39304056783348      0.4895529548990816     1       2       8             6              [&#34;11-1_A3&#34;,&#34;117-2_C4&#34;,&#34;131-1_F4&#34;,&#34;134...[1.38,-0.25,1.645,-0.245,0.005,-1.368...[[2.57,-0.345,-1.545,3.67,0.83,1.93],...[[438162,438206,438232,438261,438278,...
+1          486249 486512 12        0.2533257680909372    0.3432137034720149     1       5       6             5              [&#34;11-1_A3&#34;,&#34;117-2_C4&#34;,&#34;131-1_F4&#34;,&#34;134...[1.59,0.42,1.04,0.2,0.05,-1.53,-0.685...[[0.035,1.92,0.61,4.035,1.59],[-1.25,...[[486252,486317,486396,486435,486490]...
+1          503417 503927 11        4.930402378514754e-05 0.0002634760121402532  2       9       0             14             [&#34;11-1_A3&#34;,&#34;117-2_C4&#34;,&#34;131-1_F4&#34;,&#34;134...[2.598,1.795,1.522,-1.142,-5.395,1.73...[[-0.86,-0.87,-2.935,1.895,1.215,5.05...[[503443,503497,503540,503564,503593,...
+1          514965 516003 12        6.942129597393029e-26 9.242459947936596e-24  4       7       1             32             [&#34;11-1_A3&#34;,&#34;117-2_C4&#34;,&#34;131-1_F4&#34;,&#34;134...[-2.23,-3.225,1.2,1.265,3.05,0.505,3....[[2.48,1.3,4.55,2.79,2.04,2.98,0.84,-...[[514980,514998,515042,515096,515128,...
+1          570414 576486 11        7.321113498353957e-06 4.8645032634780694e-05 1       7       3             184            [&#34;117-2_C4&#34;,&#34;131-1_F4&#34;,&#34;134-1_H4&#34;,&#34;13...[0.66,1.628,1.518,1.638,1.078,1.652,-...[[1.89,1.6,7.95,1.235,1.935,1.515,2.2...[[570501,570666,570699,570732,570765,...
+
+track name=meth_comp itemRgb=On
+1   136203  136504  .   0   .   136203  136504  230,230,230
+1   308880  309181  .   2   .   308880  309181  209,70,67
+1   416519  416885  .   0   .   416519  416885  230,230,230
+1   436047  436994  .   0   .   436047  436994  230,230,230
+1   438148  438361  .   0   .   438148  438361  230,230,230
+1   486249  486512  .   0   .   486249  486512  230,230,230
+1   503417  503927  .   3   .   503417  503927  187,55,84
+1   514965  516003  .   23  .   514965  516003  10,7,35
+1   570414  576486  .   4   .   570414  576486  163,43,97
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../usage/" title="Using Meth_Comp" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Using Meth_Comp
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../CLI_usage/" title="Command line usage" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Command line usage
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" /></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 Adrien Leger
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.c51dfa35.min.js"></script>
+      <script src="../../assets/javascripts/bundle.eaaa3931.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.58d22e8e.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
